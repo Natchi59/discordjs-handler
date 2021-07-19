@@ -8,5 +8,8 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^12.5.3"
-  }
+  },
+  "keywords": [
+    "discordjs", "discord.js", "bot", "bot handler", "discordjs handler"
+  ]
 }

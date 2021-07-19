@@ -3,8 +3,8 @@
 Module qui permet d'exécuter des événements et des commandes pour discord.js en handler.
 
 ## Installation
-Nodejs >v14.0.0 requis.
-Via npm:
+Nodejs >v14.0.0 requis.  
+<br/>Via npm:
 ```cmd
 npm install @natchi/discordjs-handler
 ```
@@ -15,7 +15,7 @@ yarn add @natchi/discordjs-handler
 
 ## Configuration
 Vous aurez besoin d'installer un total de 3 collections dans le client dans les extensions `events`, `commands`, et `alises`.  
-**Exemple**
+<br/>**Exemple**
 ```js
 const { Client, Collection } = require("discord.js");
 
@@ -30,7 +30,7 @@ client.aliases = new Collection();
 ["events", "commands", "alises"].forEach((e) => client[e] = new Collection());
 ```
 Une fois les collections configurés, vous pouvez exécuter les handlers proposés avec le module.  
-**Exemple**  
+<br/>**Exemple**  
 ```js
 const { handlerEvents, handlerCommands } = require("@natchi/discordjs-handler");
 
@@ -39,7 +39,7 @@ const { handlerEvents, handlerCommands } = require("@natchi/discordjs-handler");
   await handlerCommands(client, "commands");
 })();
 ```
-Exemple d'arborescence:
+<br>Exemple d'arborescence:
 ```
 ├───commands
 │   └───Admin
@@ -50,3 +50,4 @@ Exemple d'arborescence:
 │       └───message.js
 │       └───messageUpdate.js
 └───index.js
+```

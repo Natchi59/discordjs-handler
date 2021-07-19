@@ -2,6 +2,12 @@
 
 Module qui permet d'exécuter des événements et des commandes pour discord.js en handler.
 
+## Liens
+- [NPM](https://www.npmjs.com/package/@natchi/discordjs-handler)
+- [Github](https://github.com/Natchi59/discordjs-handler)
+  - [Installation](https://github.com/Natchi59/discordjs-handler#installation)
+  - [Configuration](https://github.com/Natchi59/discordjs-handler#configuration)
+
 ## Installation
 Nodejs >v14.0.0 requis.  
 <br/>Via npm:

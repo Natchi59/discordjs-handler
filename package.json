@@ -1,6 +1,6 @@
 {
   "name": "@natchi/discordjs-handler",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Module qui permet d'exécuter des événements et des commandes pour discord.js en handler",
   "main": "index.js",
   "repository": "https://github.com/Natchi59/discordjs-handler.git",

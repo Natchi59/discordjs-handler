@@ -45,9 +45,10 @@ const { handlerEvents, handlerCommands } = require("@natchi/discordjs-handler");
   await handlerCommands(client, "commands");
 })();
 ```
-<br>Exemple d'arborescence:
+<br>**Exemple d'arborescence**
 ```
 ├───commands
+│   ├───ping.js
 │   └───Admin
 │       └───prefix.js
 ├───events
@@ -56,4 +57,27 @@ const { handlerEvents, handlerCommands } = require("@natchi/discordjs-handler");
 │       └───message.js
 │       └───messageUpdate.js
 └───index.js
+```
+Pour les événements il faudra utiliser un `module.exports` dans chaque fichier d'événements, avec dans l'object la clé `name` et `run` (qui est une fonction de lancement) seront obligatoires.
+<br>**Exemple** (fichier ready.js)
+```js
+module.exports = {
+  name: "ready",
+  run: (client) => {
+    console.log(`${client.user.tag} est connecté !`);
+  },
+};
+```
+Pour les commandes il faudra utiliser aussi un `module.exports` dans chaque fichier de commandes, avec dans l'object la clé `name` et `run` (qui est une fonction de lancement) seront aussi obligatoires.
+<br>**Exemple** (fichier prefix.js)
+```js
+module.exports = {
+  name: "prefix",
+  category: "Admin", // Facultatif
+  description: "Permet de changer le prefix", // Facultatif
+  adminPermission: true, // Falcultatif
+  run: (client, message, args) => {
+    // ...
+  },
+};
 ```

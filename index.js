@@ -8,12 +8,18 @@ const { Client } = require("discord.js");
  * @param {string} dirEvents Nom du dossier où sont stockés les événements
  */
 async function handlerEvents(client, dirEvents) {
-  if (!client.events) throw new ReferenceError(
-    `Le client ne possède pas de collection dans client.events`
-  );
+  if (!client.events)
+    throw new ReferenceError(
+      `Le client ne possède pas de collection dans client.events`
+    );
 
   const pathEvents = join(require.main.path, dirEvents);
-  const filesEvents = await readdir(pathEvents);
+  let filesEvents = null;
+  try {
+    filesEvents = await readdir(pathEvents);
+  } catch (err) {
+    throw new ReferenceError(`Le dossier ${dirEvents} n'existe pas`);
+  }
 
   for (const file of filesEvents) {
     const pathFile = join(pathEvents, file);
@@ -41,15 +47,22 @@ async function handlerEvents(client, dirEvents) {
  * @param {string} dirCommands Nom du dossier où sont stockés les commandes
  */
 async function handlerCommands(client, dirCommands) {
-  if (!client.commands) throw new ReferenceError(
-    `Le client ne possède pas de collection dans client.commands`
-  );
-  if (!client.aliases) throw new ReferenceError(
-    `Le client ne possède pas de collection dans client.aliases`
-  );
+  if (!client.commands)
+    throw new ReferenceError(
+      `Le client ne possède pas de collection dans client.commands`
+    );
+  if (!client.aliases)
+    throw new ReferenceError(
+      `Le client ne possède pas de collection dans client.aliases`
+    );
 
   const pathCommands = join(require.main.path, dirCommands);
-  const filesCommands = await readdir(pathCommands);
+  let filesCommands = null;
+  try {
+    filesCommands = await readdir(pathCommands);
+  } catch (err) {
+    throw new ReferenceError(`Le dossier ${dirCommands} n'existe pas`);
+  }
 
   for (const file of filesCommands) {
     const pathFile = join(pathCommands, file);

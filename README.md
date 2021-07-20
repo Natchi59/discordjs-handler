@@ -58,7 +58,7 @@ const { handlerEvents, handlerCommands } = require("@natchi/discordjs-handler");
 │       └───messageUpdate.js
 └───index.js
 ```
-Pour les événements il faudra utiliser un `module.exports` dans chaque fichier d'événements, avec dans l'object la clé `name` et `run` (qui est une fonction de lancement) seront obligatoires.
+Pour les événements il faudra utiliser un `module.exports` dans chaque fichier d'événements, avec dans l'object la clé `name` et `run` (qui est une fonction de lancement) seront obligatoires.  
 <br>**Exemple** (fichier ready.js)
 ```js
 module.exports = {
@@ -68,7 +68,7 @@ module.exports = {
   },
 };
 ```
-Pour les commandes il faudra utiliser aussi un `module.exports` dans chaque fichier de commandes, avec dans l'object la clé `name` et `run` (qui est une fonction de lancement) seront aussi obligatoires.
+Pour les commandes il faudra utiliser aussi un `module.exports` dans chaque fichier de commandes, avec dans l'object la clé `name` et `run` (qui est une fonction de lancement) seront aussi obligatoires.  
 <br>**Exemple** (fichier prefix.js)
 ```js
 module.exports = {

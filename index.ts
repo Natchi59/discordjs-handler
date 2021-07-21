@@ -19,6 +19,9 @@ export interface Command {
   ): any | Promise<any>;
 }
 
+/**
+ * Client discord.js contenant les 3 Collections pour le handler.
+ */
 export class ClientHandler extends Client {
   public events = new Collection<string, Event>();
   public commands = new Collection<string, Command>();

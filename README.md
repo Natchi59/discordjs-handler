@@ -62,7 +62,7 @@ const client = new ClientHandler();
 ```
 
 Une fois les collections configurées, vous pouvez exécuter le handler proposé avec le module.  
-Vous avez le choix d'exécuter que les événements, ou alors que les commandes, ou bien les 2 en même temps en précisant ou non le noms (et non pas le chemin) du dossier dans lequel sont stockés les fichiers d'événements ou de commandes.  
+Vous avez le choix d'exécuter que les événements, ou alors que les commandes, ou bien les 2 en même temps en précisant ou non les noms (et non pas les chemins) des dossiers dans lequels sont stockés les fichiers d'événements ou de commandes.  
 <br />**Exemple**  
 Javascript
 

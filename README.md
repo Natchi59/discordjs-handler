@@ -57,7 +57,7 @@ class ClientDjs extends Client {
 const client = new ClientDjs();
 
 // Exemple 2
-const { ClientHandler } = require("@natchi/discordjs-handler");
+import { ClientHandler } from "@natchi/discordjs-handler";
 const client = new ClientHandler();
 ```
 

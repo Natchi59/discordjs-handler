@@ -1,5 +1,8 @@
 import { Client, Message } from "discord.js";
 
+/**
+ * Interface de commande
+ */
 export interface Command {
   name: string;
   category?: string;

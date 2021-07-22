@@ -1,2 +1,2 @@
 export { ClientHandler } from "./client";
-export { handlerEvents } from "./handlers/handlerEvents";
+export { handler } from "./handlers";

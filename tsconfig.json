@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "target": "ES6",
     "module": "CommonJS",
-    "moduleResolution": "Node",
-    "target": "ESNext",
-    "outDir": "lib",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "noEmitOnError": true
+    "lib": ["ES2021"],
+    "declaration": true,
+    "outDir": "./lib",
+    "strict": true,
+    "strictFunctionTypes": true
   },
-  "include": ["index.ts"],
-  "exclude": ["node_modules", "test"]
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*.ts"]
 }

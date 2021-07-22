@@ -35,7 +35,7 @@ Javascript
 const { Client, Collection } = require("discord.js");
 
 const client = new Client();
-["events", "commands", "alises"].forEach((e) => (client[e] = new Collection()));
+["events", "commands", "aliases"].forEach((e) => (client[e] = new Collection()));
 
 // Exemple 2
 const { ClientHandler } = require("@natchi/discordjs-handler");

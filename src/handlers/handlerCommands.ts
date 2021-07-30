@@ -49,7 +49,7 @@ export async function handlerCommands(
 
       client.commands.set(command.name, command);
       if (command.aliases?.length > 0) {
-        command.alises.forEach((alias: string) => {
+        command.aliases.forEach((alias: string) => {
           client.aliases.set(alias, command);
         });
       }

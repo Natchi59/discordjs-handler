@@ -16,9 +16,6 @@ export async function handlerCommands(
 ): Promise<any> {
   if (!require.main) return;
 
-  client.handler.commands = new Collection();
-  client.handler.aliases = new Collection();
-
   const pathCommands = join(require.main.path, dirCommands);
   let filesCommands = null;
   try {
@@ -50,11 +47,14 @@ export async function handlerCommands(
           `Le fichier ${file} ne possède pas les valeurs obligatoires de l'interface Command`
         );
 
-      client.handler.commands.set(command.name, command);
-      if (command.aliases && command.aliases.length > 0) {
-        command.aliases.forEach((alias) => {
-          client.handler.aliases.set(alias, command);
-        });
+      if (client.handler.commands) {
+        client.handler.commands.set(command.name, command);
+        if (command.aliases && command.aliases.length > 0) {
+          command.aliases.forEach((alias) => {
+            if (client.handler.aliases)
+              client.handler.aliases.set(alias, command);
+          });
+        }
       }
     }
   }

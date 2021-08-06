@@ -16,8 +16,6 @@ export async function handlerEvents(
 ): Promise<any> {
   if (!require.main) return;
 
-  client.handler.events = new Collection();
-
   const pathEvents = join(require.main.path, dirEvents);
   let filesEvents = null;
   try {
@@ -49,8 +47,10 @@ export async function handlerEvents(
           `Le fichier ${file} ne possède pas les valeurs obligatoires de l'interface Event`
         );
 
-      client.handler.events.set(event.name, event);
-      client.on(event.name, event.run.bind(null, client));
+      if (client.handler.events) {
+        client.handler.events.set(event.name, event);
+        client.on(event.name, event.run.bind(null, client));
+      }
     }
   }
 }

@@ -7,9 +7,9 @@ export { Event, Command } from "./interfaces";
 declare module "discord.js" {
   interface Client {
     handler: {
-      events: Collection<string, Event>;
-      commands: Collection<string, Command>;
-      aliases: Collection<string, Command>;
+      events: Collection<string, Event> | null;
+      commands: Collection<string, Command> | null;
+      aliases: Collection<string, Command> | null;
     };
   }
 }

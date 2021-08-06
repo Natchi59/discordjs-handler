@@ -1,4 +1,4 @@
-import { Client } from "discord.js";
+import { Client, Collection } from "discord.js";
 import { DirOptions, HandlerOptions } from "../interfaces/Options";
 import { handlerCommands } from "./handlerCommands";
 import { handlerEvents } from "./handlerEvents";
@@ -14,6 +14,12 @@ export async function handler(
   dirs: DirOptions,
   options: HandlerOptions
 ): Promise<any> {
+  client.handler = {
+    events: dirs?.events ? new Collection() : null,
+    commands: dirs?.commands ? new Collection() : null,
+    aliases: dirs?.commands ? new Collection() : null,
+  };
+
   if (dirs?.events) await handlerEvents(client, dirs.events, options);
   if (dirs?.commands) await handlerCommands(client, dirs.commands, options);
 }

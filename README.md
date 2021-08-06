@@ -1,6 +1,6 @@
 # discordjs-handler
 
-Module qui permet d'exécuter des événements et des commandes pour discord.js en handler.
+Module qui permet d'exécuter des événements ou des commandes ou des interactions pour discord.js en handler.
 
 ## Liens
 
@@ -11,7 +11,7 @@ Module qui permet d'exécuter des événements et des commandes pour discord.js 
 
 ## Installation
 
-Nodejs >v14.0.0 requis.  
+Nodejs >v16.6.0 requis.  
 <br/>Via npm:
 
 ```cmd
@@ -26,44 +26,11 @@ yarn add @natchi/discordjs-handler
 
 ## Configuration
 
-Pour commencer, vous devez intégrer un total de 3 Collections (du module discord.js) sur votre Client avec comme noms `events`, `commands`, et `aliases`. Ou vous pouvez créé un nouveau client à partir de la class `ClientHandler` proposé avec le module.  
+Vous avez juste à importer la fonction `handler` dans votre projet et l'utilisé qu'une seule fois dans un de vos fichiers.  
+Celui ci va crée automatiquement des Collections pour les différentes utilités: `commands`, `events`, `slashCommands`, `buttons`, et `selectMenus`.  
+Vous pourrez retrouvez ces collections depuis `client.handler.$`.  
+Bien sûr les choix des handlers à éxécuter est optionnel, vous n'êtes pas obliger de préciser tous les chemins, cela est en fonction de votre utilisation.  
 <br />**Exemples**  
-Javascript
-
-```js
-// Exemple 1
-const { Client, Collection } = require("discord.js");
-
-const client = new Client();
-["events", "commands", "aliases"].forEach((e) => (client[e] = new Collection()));
-
-// Exemple 2
-const { ClientHandler } = require("@natchi/discordjs-handler");
-const client = new ClientHandler();
-```
-
-Typescript
-
-```ts
-// Exemple 1
-import { Client, Collection } from "discord.js";
-import { Event, Command } from "@natchi/discordjs-handler";
-
-class ClientDjs extends Client {
-  public events = new Collection<string, Event>();
-  public commands = new Collection<string, Command>();
-  public aliases = new Collection<string, Command>();
-}
-const client = new ClientDjs();
-
-// Exemple 2
-import { ClientHandler } from "@natchi/discordjs-handler";
-const client = new ClientHandler();
-```
-
-Une fois les collections configurées, vous pouvez exécuter le handler proposé avec le module.  
-Vous avez le choix d'exécuter que les événements, ou alors que les commandes, ou bien les 2 en même temps en précisant ou non les noms (et non pas les chemins) des dossiers dans lequels sont stockés les fichiers d'événements ou de commandes.  
-<br />**Exemple**  
 Javascript
 
 ```js
@@ -73,8 +40,11 @@ const { handler } = require("@natchi/discordjs-handler");
   await handler(
     client,
     {
-      events: "events",
-      commands: "commands",
+      events: "./events",
+      commands: "./commands",
+      slashCommands: "./interactions/slashcommands",
+      buttons: "./interactions/buttons",
+      selectMenus: "./interactions/selectmenus",
     },
     {
       lang: "js",
@@ -86,49 +56,33 @@ const { handler } = require("@natchi/discordjs-handler");
 Typescript
 
 ```ts
-// Exemple 1
 import { handler } from "@natchi/discordjs-handler";
 
 (async () => {
   await handler(
     client,
     {
-      events: "events",
-      commands: "commands",
+      events: "./events",
+      commands: "./commands",
+      slashCommands: "./interactions/slashcommands",
+      buttons: "./interactions/buttons",
+      selectMenus: "./interactions/selectmenus",
     },
     {
       lang: "ts",
     }
   );
 })();
-
-// Exemple 2
-import { ClientHandler, handler } from "@natchi/discordjs-handler";
-
-class Client extends ClientHandler {
-  public async init() {
-    await handler(
-      this,
-      {
-        events: "events",
-        commands: "commands",
-      },
-      {
-        lang: "ts",
-      }
-    );
-  }
-}
-
-const client = new Client();
-
-(async () => {
-  client.init();
-})();
 ```
 
-Pour les fichiers d'événements ou de commandes, voici le schéma à suivre selon le langage.  
-Pout le langage Typescript, l'export des événements doit se faire obligatoirement par une constante avec le nom `event` et pour les commandes, une constante avec le nom `command`.  
+Pour les fichiers d'événements ou de commandes, ou d'intéractions voici le schéma à suivre selon le langage.  
+Pout le langage Typescript, l'export des événements doit se faire obligatoirement par une constante en respectant le nom de celles ci en fonction de ce que vous voulez exporter.  
+- Evénements: `event`
+- Commandes: `command`
+- SlashCommands: `slashCommand`
+- Buttons: `button`
+- SelectMenus: `button`
+
 <br />**Exemple**  
 Javascript
 
@@ -146,8 +100,17 @@ module.exports = {
   name: "ping",
   category: "Fun", // Facultatif
   description: "Permet de faire Ping Pong", // Facultatif
-  alises: ["p"], // Facultatif
+  aliases: ["p"], // Facultatif
   run: (client, message, args) => {
+    // ...
+  },
+};
+
+// Fichier pingSlash.js
+module.exports = {
+  name: "ping",
+  description: "Permet de faire Ping Pong",
+  run: (client, interaction) => {
     // ...
   },
 };
@@ -163,8 +126,8 @@ export const event: Event = {
   name: "message",
   run: (client, message) => {
     // ...
-  }
-}
+  },
+};
 
 // Fichier ping.ts
 import { Command } from "@natchi/discordjs-handler";
@@ -176,6 +139,17 @@ export const command: Command = {
   alises: ["p"], // Facultatif
   run: (client, message, args) => {
     // ...
-  }
-}
+  },
+};
+
+// Fichier pingSlash.ts
+import { SlashCommand } from "@natchi/discordjs-handler";
+
+export const slashCommand: SlashCommand = {
+  name: "ping",
+  description: "Permet de faire Ping Pong",
+  run: (client, interaction) => {
+    // ...
+  },
+};
 ```

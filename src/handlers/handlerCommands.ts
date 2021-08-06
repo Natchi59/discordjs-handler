@@ -1,16 +1,16 @@
+import { Client, Collection } from "discord.js";
 import { join, extname } from "path";
 import { readdir, stat } from "fs/promises";
-import { HandlerOptions } from "../interfaces/Options";
-import { ClientHandler } from "../client";
+import { Command, HandlerOptions } from "../interfaces";
 
 /**
  * Handler des commandes
- * @param {ClientHandler} client Client avec les collection du handler
- * @param {String} dirCommands Nom du dossier des commandes
+ * @param {Client} client Client discord.js
+ * @param {String} dirCommands Chemin du dossier des Commandes
  * @param {HandlerOptions} options Options du handler
  */
 export async function handlerCommands(
-  client: ClientHandler,
+  client: Client,
   dirCommands: string,
   options?: HandlerOptions
 ): Promise<any> {
@@ -33,25 +33,28 @@ export async function handlerCommands(
 
     const lang = options?.lang ? options.lang : "js";
     if (extname(pathFile) === `.${lang}`) {
-      let command = require(pathFile);
+      let command: Command = require(pathFile);
       if (lang === "ts") {
-        command = command.command;
+        command = require(pathFile).command;
         if (!command)
           throw new SyntaxError(
-            `L'export dans le fichier ${file} doit se faire avec une constante nommée command`
+            `L'export dans le fichier ${file} doit se faire avec une constante nommée "command"`
           );
       }
 
       if (!command.name || !command.run)
         throw new ReferenceError(
-          `Le fichier ${file} ne possède pas les valeurs obligatoires de l'interface Command`
+          `Le fichier ${file} ne possède pas "name" ou "run()"`
         );
 
-      client.commands.set(command.name, command);
-      if (command.aliases?.length > 0) {
-        command.aliases.forEach((alias: string) => {
-          client.aliases.set(alias, command);
-        });
+      if (client.handler.commands) {
+        client.handler.commands.set(command.name, command);
+        if (command.aliases && command.aliases.length > 0) {
+          command.aliases.forEach((alias) => {
+            if (client.handler.aliases)
+              client.handler.aliases.set(alias, command);
+          });
+        }
       }
     }
   }

@@ -21,9 +21,9 @@ export async function handler(
     events: dirs?.events ? new Collection() : null,
     commands: dirs?.commands ? new Collection() : null,
     aliases: dirs?.commands ? new Collection() : null,
-    slashcommands: dirs?.slashCommands ? new Collection() : null,
+    slashCommands: dirs?.slashCommands ? new Collection() : null,
     buttons: dirs?.buttons ? new Collection() : null,
-    selectmenus: dirs?.selectMenus ? new Collection() : null,
+    selectMenus: dirs?.selectMenus ? new Collection() : null,
   };
 
   if (dirs?.events) await handlerEvents(client, dirs.events, options);

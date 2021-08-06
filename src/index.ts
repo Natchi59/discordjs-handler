@@ -10,9 +10,9 @@ declare module "discord.js" {
       events: Collection<string, Event> | null;
       commands: Collection<string, Command> | null;
       aliases: Collection<string, Command> | null;
-      slashcommands: Collection<string, SlashCommand> | null;
+      slashCommands: Collection<string, SlashCommand> | null;
       buttons: Collection<string, Button> | null;
-      selectmenus: Collection<string, SelectMenu> | null;
+      selectMenus: Collection<string, SelectMenu> | null;
     };
   }
 }

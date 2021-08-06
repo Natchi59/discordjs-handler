@@ -1,7 +1,7 @@
 {
   "name": "@natchi/discordjs-handler",
-  "version": "2.0.0-dev.1.0.0",
-  "description": "Module qui permet d'exécuter des événements ou des commandes ou encore des intéractions pour discord.js en handler",
+  "version": "2.0.0",
+  "description": "Module qui permet d'exécuter des événements ou des commandes ou encore des interactions pour discord.js en handler",
   "repository": "https://github.com/Natchi59/discordjs-handler.git",
   "author": "Natchi <nathan.caron@natchi.fr>",
   "license": "MIT",
@@ -16,14 +16,14 @@
     "bot handler",
     "discordjs handler"
   ],
-  "dependencies": {
-    "discord.js": "^13.0.0-dev.t1628208261.a56ba09"
-  },
   "engines": {
     "node": ">=16.6.0"
   },
   "scripts": {
     "build": "tsc"
+  },
+  "dependencies": {
+    "discord.js": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^16.4.0"

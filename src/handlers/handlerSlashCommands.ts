@@ -42,13 +42,13 @@ export async function handlerSlashCommands(
           );
       }
 
-      if (!slashCommand.name || !slashCommand.run)
+      if (!slashCommand.name || !slashCommand.description || !slashCommand.run)
         throw new ReferenceError(
-          `Le fichier ${file} ne possède pas "name" ou "run()"`
+          `Le fichier ${file} ne possède pas "name" ou "description" ou "run()"`
         );
 
-      if (client.handler.slashcommands) {
-        client.handler.slashcommands.set(slashCommand.name, slashCommand);
+      if (client.handler.slashCommands) {
+        client.handler.slashCommands.set(slashCommand.name, slashCommand);
       }
     }
   }

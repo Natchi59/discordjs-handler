@@ -47,8 +47,8 @@ export async function handlerSelectMenus(
           `Le fichier ${file} ne possède pas "customId" ou "run()"`
         );
 
-      if (client.handler.selectmenus) {
-        client.handler.selectmenus.set(selectMenu.customId, selectMenu);
+      if (client.handler.selectMenus) {
+        client.handler.selectMenus.set(selectMenu.customId, selectMenu);
       }
     }
   }

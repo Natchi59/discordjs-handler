@@ -5,8 +5,8 @@ import { Event, HandlerOptions } from "../interfaces";
 
 /**
  * Handler des événements
- * @param {Client} client Client avec les collection du handler
- * @param {String} dirEvents Nom du dossier des événements
+ * @param {Client} client Client discord.js
+ * @param {String} dirEvents Chemin du dossier des Evénements
  * @param {HandlerOptions} options Options du handler
  */
 export async function handlerEvents(
@@ -38,13 +38,13 @@ export async function handlerEvents(
         event = require(pathFile).event;
         if (!event)
           throw new SyntaxError(
-            `L'export dans le fichier ${file} doit se faire avec une constante nommée event`
+            `L'export dans le fichier ${file} doit se faire avec une constante nommée "event"`
           );
       }
 
       if (!event.name || !event.run)
         throw new ReferenceError(
-          `Le fichier ${file} ne possède pas les valeurs obligatoires de l'interface Event`
+          `Le fichier ${file} ne possède pas "name" ou "run()"`
         );
 
       if (client.handler.events) {

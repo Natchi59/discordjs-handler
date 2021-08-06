@@ -5,8 +5,8 @@ import { Command, HandlerOptions } from "../interfaces";
 
 /**
  * Handler des commandes
- * @param {Client} client Client avec les collection du handler
- * @param {String} dirCommands Nom du dossier des commandes
+ * @param {Client} client Client discord.js
+ * @param {String} dirCommands Chemin du dossier des Commandes
  * @param {HandlerOptions} options Options du handler
  */
 export async function handlerCommands(
@@ -38,13 +38,13 @@ export async function handlerCommands(
         command = require(pathFile).command;
         if (!command)
           throw new SyntaxError(
-            `L'export dans le fichier ${file} doit se faire avec une constante nommée command`
+            `L'export dans le fichier ${file} doit se faire avec une constante nommée "command"`
           );
       }
 
       if (!command.name || !command.run)
         throw new ReferenceError(
-          `Le fichier ${file} ne possède pas les valeurs obligatoires de l'interface Command`
+          `Le fichier ${file} ne possède pas "name" ou "run()"`
         );
 
       if (client.handler.commands) {

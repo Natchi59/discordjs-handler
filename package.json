@@ -1,7 +1,7 @@
 {
   "name": "@natchi/discordjs-handler",
-  "version": "2.0.0-dev.0.0.3",
-  "description": "Module qui permet d'exécuter des événements et des commandes pour discord.js en handler",
+  "version": "2.0.0-dev.1.0.0",
+  "description": "Module qui permet d'exécuter des événements ou des commandes ou encore des intéractions pour discord.js en handler",
   "repository": "https://github.com/Natchi59/discordjs-handler.git",
   "author": "Natchi <nathan.caron@natchi.fr>",
   "license": "MIT",

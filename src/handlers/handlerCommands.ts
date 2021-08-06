@@ -12,7 +12,7 @@ import { Command, HandlerOptions } from "../interfaces";
 export async function handlerCommands(
   client: Client,
   dirCommands: string,
-  options?: HandlerOptions
+  options: HandlerOptions
 ): Promise<any> {
   if (!require.main) return;
 
@@ -31,10 +31,9 @@ export async function handlerCommands(
     if (statFile.isDirectory())
       handlerCommands(client, join(dirCommands, file), options);
 
-    const lang = options?.lang ? options.lang : "js";
-    if (extname(pathFile) === `.${lang}`) {
+    if (extname(pathFile) === `.${options.lang}`) {
       let command: Command = require(pathFile);
-      if (lang === "ts") {
+      if (options.lang === "ts") {
         command = require(pathFile).command;
         if (!command)
           throw new SyntaxError(

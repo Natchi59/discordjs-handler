@@ -12,7 +12,7 @@ import { Button, HandlerOptions } from "../interfaces";
 export async function handlerButtons(
   client: Client,
   dirButtons: string,
-  options?: HandlerOptions
+  options: HandlerOptions
 ): Promise<any> {
   if (!require.main) return;
 
@@ -31,10 +31,9 @@ export async function handlerButtons(
     if (statFile.isDirectory())
       handlerButtons(client, join(dirButtons, file), options);
 
-    const lang = options?.lang ? options.lang : "js";
-    if (extname(pathFile) === `.${lang}`) {
+    if (extname(pathFile) === `.${options.lang}`) {
       let button: Button = require(pathFile);
-      if (lang === "ts") {
+      if (options.lang === "ts") {
         button = require(pathFile).button;
         if (!button)
           throw new SyntaxError(

@@ -12,7 +12,7 @@ import { Event, HandlerOptions } from "../interfaces";
 export async function handlerEvents(
   client: Client,
   dirEvents: string,
-  options?: HandlerOptions
+  options: HandlerOptions
 ): Promise<any> {
   if (!require.main) return;
 
@@ -31,10 +31,9 @@ export async function handlerEvents(
     if (statFile.isDirectory())
       handlerEvents(client, join(dirEvents, file), options);
 
-    const lang = options?.lang ? options.lang : "js";
-    if (extname(pathFile) === `.${lang}`) {
+    if (extname(pathFile) === `.${options.lang}`) {
       let event: Event = require(pathFile);
-      if (lang === "ts") {
+      if (options.lang === "ts") {
         event = require(pathFile).event;
         if (!event)
           throw new SyntaxError(

@@ -1,5 +1,5 @@
 export interface HandlerOptions {
-  lang?: "ts" | "js";
+  lang: "ts" | "js";
 }
 
 export interface DirOptions {

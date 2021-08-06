@@ -12,7 +12,7 @@ import { SelectMenu, HandlerOptions } from "../interfaces";
 export async function handlerSelectMenus(
   client: Client,
   dirSelectMenus: string,
-  options?: HandlerOptions
+  options: HandlerOptions
 ): Promise<any> {
   if (!require.main) return;
 
@@ -31,10 +31,9 @@ export async function handlerSelectMenus(
     if (statFile.isDirectory())
       handlerSelectMenus(client, join(dirSelectMenus, file), options);
 
-    const lang = options?.lang ? options.lang : "js";
-    if (extname(pathFile) === `.${lang}`) {
+    if (extname(pathFile) === `.${options.lang}`) {
       let selectMenu: SelectMenu = require(pathFile);
-      if (lang === "ts") {
+      if (options.lang === "ts") {
         selectMenu = require(pathFile).selectMenu;
         if (!selectMenu)
           throw new SyntaxError(

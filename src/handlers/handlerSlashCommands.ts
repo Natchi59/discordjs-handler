@@ -12,7 +12,7 @@ import { SlashCommand, HandlerOptions } from "../interfaces";
 export async function handlerSlashCommands(
   client: Client,
   dirSlashCommands: string,
-  options?: HandlerOptions
+  options: HandlerOptions
 ): Promise<any> {
   if (!require.main) return;
 
@@ -31,10 +31,9 @@ export async function handlerSlashCommands(
     if (statFile.isDirectory())
       handlerSlashCommands(client, join(dirSlashCommands, file), options);
 
-    const lang = options?.lang ? options.lang : "js";
-    if (extname(pathFile) === `.${lang}`) {
+    if (extname(pathFile) === `.${options.lang}`) {
       let slashCommand: SlashCommand = require(pathFile);
-      if (lang === "ts") {
+      if (options.lang === "ts") {
         slashCommand = require(pathFile).slashcommand;
         if (!slashCommand)
           throw new SyntaxError(

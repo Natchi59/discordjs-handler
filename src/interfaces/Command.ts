@@ -7,6 +7,6 @@ export interface Command {
   name: string;
   category?: string;
   description?: string;
-  alises?: Array<string>;
+  aliases?: Array<string>;
   run (client: Client, message: Message, args: Array<string>): Promise<any> | any;
 }

@@ -1,20 +1,23 @@
+import { Client, Collection } from "discord.js";
 import { join, extname } from "path";
 import { readdir, stat } from "fs/promises";
-import { HandlerOptions } from "../interfaces/Options";
-import { ClientHandler } from "../client";
+import { Command, HandlerOptions } from "../interfaces";
 
 /**
  * Handler des commandes
- * @param {ClientHandler} client Client avec les collection du handler
+ * @param {Client} client Client avec les collection du handler
  * @param {String} dirCommands Nom du dossier des commandes
  * @param {HandlerOptions} options Options du handler
  */
 export async function handlerCommands(
-  client: ClientHandler,
+  client: Client,
   dirCommands: string,
   options?: HandlerOptions
 ): Promise<any> {
   if (!require.main) return;
+
+  client.handler.commands = new Collection();
+  client.handler.aliases = new Collection();
 
   const pathCommands = join(require.main.path, dirCommands);
   let filesCommands = null;
@@ -33,9 +36,9 @@ export async function handlerCommands(
 
     const lang = options?.lang ? options.lang : "js";
     if (extname(pathFile) === `.${lang}`) {
-      let command = require(pathFile);
+      let command: Command = require(pathFile);
       if (lang === "ts") {
-        command = command.command;
+        command = require(pathFile).command;
         if (!command)
           throw new SyntaxError(
             `L'export dans le fichier ${file} doit se faire avec une constante nommée command`
@@ -47,10 +50,10 @@ export async function handlerCommands(
           `Le fichier ${file} ne possède pas les valeurs obligatoires de l'interface Command`
         );
 
-      client.commands.set(command.name, command);
-      if (command.aliases?.length > 0) {
-        command.alises.forEach((alias: string) => {
-          client.aliases.set(alias, command);
+      client.handler.commands.set(command.name, command);
+      if (command.aliases && command.aliases.length > 0) {
+        command.aliases.forEach((alias) => {
+          client.handler.aliases.set(alias, command);
         });
       }
     }

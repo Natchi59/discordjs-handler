@@ -1,6 +1,9 @@
-import { Client, SelectMenuInteraction } from "discord.js";
+import {
+  Client,
+  SelectMenuInteraction,
+  MessageSelectMenuOptions,
+} from "discord.js";
 
-export interface SelectMenu {
-  customId: string;
+export interface SelectMenu extends MessageSelectMenuOptions {
   run(client: Client, interaction: SelectMenuInteraction): any | Promise<any>;
 }

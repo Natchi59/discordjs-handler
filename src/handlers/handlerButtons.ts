@@ -41,9 +41,9 @@ export async function handlerButtons(
           );
       }
 
-      if (!button.customId || !button.run)
+      if (!button.customId || !button.style || !button.run)
         throw new ReferenceError(
-          `Le fichier ${file} ne possède pas "customId" ou "run()"`
+          `Le fichier ${file} ne possède pas "customId" ou "style" ou "run()"`
         );
 
       if (client.handler.buttons) {

@@ -1,6 +1,9 @@
-import { ButtonInteraction, Client } from "discord.js";
+import {
+  Client,
+  ButtonInteraction,
+  InteractionButtonOptions,
+} from "discord.js";
 
-export interface Button {
-  customId: string;
+export interface Button extends InteractionButtonOptions {
   run(client: Client, interaction: ButtonInteraction): any | Promise<any>;
 }

@@ -34,7 +34,7 @@ export async function handlerSlashCommands(
     if (extname(pathFile) === `.${options.lang}`) {
       let slashCommand: SlashCommand = require(pathFile);
       if (options.lang === "ts") {
-        slashCommand = require(pathFile).slashcommand;
+        slashCommand = require(pathFile).slashCommand;
         if (!slashCommand)
           throw new SyntaxError(
             `L'export dans le fichier ${file} doit se faire avec une constante nommée "slashCommand"`
